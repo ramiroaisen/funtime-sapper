@@ -227,9 +227,12 @@ function generate_server_manifest(
 			error
 		};
 
-		export const build_dir = ${JSON.stringify(build_dir)};
+		// Allow miltiple sapper instances, dirs relative to sapper build instaed of cwd
+		// export const build_dir = $\{JSON.stringify(build_dir)};
+		export const build_dir = require("path").resolve(__dirname, "../");
 
-		export const src_dir = ${JSON.stringify(src_dir)};
+		// export const src_dir = $\{JSON.stringify(src_dir)};
+		export const src_dir = require("path").resolve(__dirname, "../../../src");
 
 		export const dev = ${dev ? 'true' : 'false'};
 	`.replace(/^\t{2}/gm, '').trim();

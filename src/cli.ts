@@ -178,7 +178,9 @@ prog.command('build [dest]')
 				process.env.NODE_ENV = process.env.NODE_ENV || 'production';
 				process.env.PORT = process.env.PORT || ${opts.port || 3000};
 
-				console.log('Starting server on port ' + process.env.PORT);
+				// FORK
+				// remove annoying console log at startup
+				// console.log('Starting server on port ' + process.env.PORT);
 				require('./server/server.js');
 			`.replace(/^\t+/gm, '').trim());
 

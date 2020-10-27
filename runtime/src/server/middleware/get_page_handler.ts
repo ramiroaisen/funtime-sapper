@@ -19,6 +19,9 @@ import App from '@sapper/internal/App.svelte';
 import { PageContext, PreloadResult } from '@sapper/common';
 import detectClientOnlyReferences from './detect_client_only_references';
 
+// FORK: import Socket type, used to get request's port
+import type {Socket} from "net"; 
+
 export function get_page_handler(
 	manifest: Manifest,
 	session_getter: (req: SapperRequest, res: SapperResponse) => Promise<any>
@@ -129,13 +132,18 @@ export function get_page_handler(
 			},
 			fetch: (url: string, opts?: any) => {
 				const protocol = req.socket.encrypted ? 'https' : 'http';
-				const parsed = new URL.URL(url, `${protocol}://127.0.0.1:${process.env.PORT}${req.baseUrl ? req.baseUrl + '/' :''}`);
+				// FORK
+				// Resolve port from request socket, allows multiple sapper with different ports in the same process
+				const parsed = new URL.URL(url, `${protocol}://127.0.0.1:${req.socket.localPort}${req.baseUrl ? req.baseUrl + '/' :''}`);
+				// const parsed = new URL.URL(url, `${protocol}://127.0.0.1:${process.env.PORT}${req.baseUrl ? req.baseUrl + '/' :''}`);
 
 				opts = Object.assign({}, opts);
 
 				const include_credentials = (
 					opts.credentials === 'include' ||
-					opts.credentials !== 'omit' && parsed.origin === `${protocol}://127.0.0.1:${process.env.PORT}`
+					// FORK: change port here too
+					opts.credentials !== 'omit' && parsed.origin === `${protocol}://127.0.0.1:${req.socket.localPort}`
+					// opts.credentials !== 'omit' && parsed.origin === `${protocol}://127.0.0.1:${process.env.PORT}`
 				);
 
 				if (include_credentials) {
