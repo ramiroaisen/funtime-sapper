@@ -200,7 +200,8 @@ export async function navigate(dest: Target, id: number, noscroll?: boolean, has
 	}
 
 	await handle_target(dest);
-	if (document.activeElement && (document.activeElement instanceof HTMLElement)) document.activeElement.blur();
+	// FORK: remove auto blur
+	//if (document.activeElement && (document.activeElement instanceof HTMLElement)) document.activeElement.blur();
 
 	if (!noscroll) {
 		let scroll = scroll_history[id];

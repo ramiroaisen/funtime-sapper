@@ -5,6 +5,7 @@
 * Search "FORK" with VSCode to find FORK changes
 * Change directories resolving, basing in build dir instead of cwd to allow multiple sapper instances in the same process
 * Change process.env.PORT to req.socket.localPort in server route preload to allow mutiple sapper instances in the same process but listening at different ports
+* Remove auto blur of active element
 
 ## Unreleased
 
