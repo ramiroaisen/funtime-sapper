@@ -18,6 +18,7 @@ import {
 import App from '@sapper/internal/App.svelte';
 import { PageContext, PreloadResult } from '@sapper/common';
 import detectClientOnlyReferences from './detect_client_only_references';
+import isRelativeURL from "is-relative-url";
 
 // FORK: import Socket type, used to get request's port
 import type {Socket} from "net"; 
@@ -138,6 +139,14 @@ export function get_page_handler(
 				// const parsed = new URL.URL(url, `${protocol}://127.0.0.1:${process.env.PORT}${req.baseUrl ? req.baseUrl + '/' :''}`);
 
 				opts = Object.assign({}, opts);
+				
+				// FORK
+				// Forward Host header
+				if(isRelativeURL(url)) {
+					if(!opts.headers) opts.headers = {};
+					// @ts-ignore
+					if(req.hostname) opts.headers.host = req.hostname;
+				}
 
 				const include_credentials = (
 					opts.credentials === 'include' ||

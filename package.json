@@ -21,6 +21,7 @@
   "dependencies": {
     "html-minifier": "^4.0.0",
     "http-link-header": "^1.0.2",
+    "is-relative-url": "^3.0.0",
     "shimport": "^2.0.4",
     "source-map": "^0.6.1",
     "sourcemap-codec": "^1.4.6",
