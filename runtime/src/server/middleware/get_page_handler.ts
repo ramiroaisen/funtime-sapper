@@ -144,12 +144,7 @@ export function get_page_handler(
 				// Forward Host header
 				if(isRelativeURL(url)) {
 					if(!opts.headers) opts.headers = {};
-					// @ts-ignore
-					console.log("SAPPER PRELOAD req.headers.host", req.headers.host);
-					// @ts-ignore
-					console.log("SAPPER PRELOAD req.hostname", req.hostname);
-					// @ts-ignore
-					if(req.hostname) opts.headers.host = req.hostname;
+					if(req.headers.host) opts.headers.host = req.headers.host;
 				}
 
 				const include_credentials = (
