@@ -145,6 +145,10 @@ export function get_page_handler(
 				if(isRelativeURL(url)) {
 					if(!opts.headers) opts.headers = {};
 					// @ts-ignore
+					console.log("SAPPER PRELOAD req.getHeader('host')", req.getHeader("host"));
+					// @ts-ignore
+					console.log("SAPPER PRELOAD req.hostname", req.hostname);
+					// @ts-ignore
 					if(req.hostname) opts.headers.host = req.hostname;
 				}
 
