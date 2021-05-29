@@ -39,6 +39,14 @@ export function load_current_page(): Promise<void> {
 	});
 }
 
+// CUSTOM
+export function refresh(noscroll = true){
+	return Promise.resolve().then(() => {
+		const target = select_target(new URL(location.href));
+		if(target) return navigate(target, uid, noscroll, location.hash)
+	})
+}
+
 let base_url: string;
 let handle_target: (dest: Target) => Promise<void>;
 
