@@ -39,10 +39,11 @@ export function load_current_page(): Promise<void> {
 	});
 }
 
-// CUSTOM
+// FORK: like location.reload()
 export function refresh(noscroll = true){
 	return Promise.resolve().then(() => {
 		const target = select_target(new URL(location.href));
+		console.log("TARGET", target);
 		if(target) return navigate(target, uid, noscroll, location.hash)
 	})
 }
