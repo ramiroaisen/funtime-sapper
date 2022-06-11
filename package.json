@@ -1,5 +1,5 @@
 {
-  "name": "sapper",
+  "name": "@ramiroaisen/funtime-sapper",
   "version": "0.28.10",
   "description": "The next small thing in web development, powered by Svelte",
   "bin": {
