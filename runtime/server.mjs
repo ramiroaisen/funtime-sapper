@@ -4955,7 +4955,8 @@ function serve({ prefix, pathname, cache_control }) {
         : (file) => (cache.has(file) ? cache : cache.set(file, fs.readFileSync(path.join(build_dir, file)))).get(file);
     return (req, res, next) => {
         if (filter(req)) {
-            const type = lite.lookup(req.path);
+            // @ts-ignore
+            const type = lite.getType(req.path);
             try {
                 const file = path.posix.normalize(decodeURIComponent(req.path));
                 const data = read(file);
